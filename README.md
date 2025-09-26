@@ -2,9 +2,20 @@
 
 ## 🚀 Project Overview
 
-**Live URL**:
+**Live URL**: https://cycle-savvy-search.vercel.app/
 
 Vahan Bazar is a modern two-wheeler marketplace web application that connects buyers, sellers, and dealerships in a single platform. Users can browse bikes, scooters, and electric vehicles (EVs), search and filter by brand, price, or fuel type, view detailed specifications with images, compare models side by side, use EMI and fuel cost calculators, check upcoming launches, explore showrooms, and book test rides or sell used bikes.
+
+## ⚠️ SECURITY NOTICE
+
+**Important**: This repository previously contained exposed Supabase credentials in the `.env` file. These credentials have been:
+1. Removed from the git history
+2. Invalidated in Supabase
+3. Replaced with placeholder values
+
+If you have cloned this repository before September 27, 2025, please pull the latest changes to get the updated `.env` file with placeholder values.
+
+For security reasons, you should never commit sensitive information like API keys, database credentials, or other secrets to a public repository. Always use environment variables and include `.env` in your `.gitignore` file.
 
 ## 📝 Problem Statement
 
@@ -163,6 +174,8 @@ VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
+**Important**: Never commit your actual Supabase credentials to the repository. Always use placeholder values in the `.env` file and keep your real credentials in a local `.env.local` file that is excluded from version control.
+
 4. Run the development server:
 ```bash
 bun run dev
@@ -195,7 +208,7 @@ src/
 
 ### Git Ignore
 The project includes a comprehensive `.gitignore` file that excludes:
-- Sensitive environment files (`.env`)
+- Sensitive environment files (`.env`, `.env.local`, `.env.*.local`)
 - Dependency directories (`node_modules`)
 - Build outputs (`/dist`)
 - Log files and OS-generated files
@@ -207,7 +220,14 @@ All sensitive configuration is stored in environment variables:
 - API keys
 - Database connection strings
 
-Never commit sensitive information to the repository.
+**Never commit sensitive information to the repository.** The `.env` file in the repository only contains placeholder values.
+
+### Security Best Practices
+1. Always use `.env.local` for your actual credentials (this is gitignored)
+2. Never share your actual credentials in code repositories
+3. Regularly rotate your API keys and credentials
+4. Use strong, unique passwords for all accounts
+5. Enable two-factor authentication where available
 
 ## 🌐 GitHub Workflow
 
@@ -237,7 +257,7 @@ git pull origin main
 ```
 - Use descriptive commit messages
 - Push changes frequently to avoid conflicts
-- Never push sensitive information (`.env` files)
+- Never push sensitive information (`.env` files with real credentials)
 
 ## 🔮 Future Enhancements
 
