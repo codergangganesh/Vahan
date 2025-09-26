@@ -191,6 +191,54 @@ src/
 └── App.jsx              # Main application component
 ```
 
+## 🛡️ Security & Git Configuration
+
+### Git Ignore
+The project includes a comprehensive `.gitignore` file that excludes:
+- Sensitive environment files (`.env`)
+- Dependency directories (`node_modules`)
+- Build outputs (`/dist`)
+- Log files and OS-generated files
+- Editor-specific files
+
+### Environment Variables
+All sensitive configuration is stored in environment variables:
+- Supabase credentials
+- API keys
+- Database connection strings
+
+Never commit sensitive information to the repository.
+
+## 🌐 GitHub Workflow
+
+### Pushing Changes to GitHub
+
+1. **Initialize Git** (if not already done):
+```bash
+git init
+git remote add origin <your-repository-url>
+```
+
+2. **Stage and commit changes**:
+```bash
+git add .
+git commit -m "Your descriptive commit message"
+```
+
+3. **Push to GitHub**:
+```bash
+git push -u origin main
+```
+
+### Best Practices
+- Always pull the latest changes before pushing:
+```bash
+git pull origin main
+```
+- Use descriptive commit messages
+- Push changes frequently to avoid conflicts
+- Never push sensitive information (`.env` files)
+
 ## 🔮 Future Enhancements
 
 - **Admin/Dealer Dashboard** - Inventory management, leads tracking, analytics
