@@ -1,73 +1,82 @@
-# Welcome to your Lovable project
+# Welcome to our Vahan Bazar project
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/9099d3d3-6913-4582-aaa5-cc1994f20c84
+**URL**:  https://cycle-savvy-search.vercel.app/
+🚀 Vahan Bazar – Two-Wheeler Marketplace Web App
+📝 Problem Statement
 
-## How can I edit this code?
+Build a two-wheeler marketplace web app where users can browse bikes, scooters, and electric vehicles (EVs), search and filter by brand, price, or fuel type, view detailed specs with images, compare models side by side, use EMI and fuel cost calculators, check upcoming launches, explore showrooms, and book test rides or sell used bikes.
 
-There are several ways of editing your application.
+📌 Detailed Proposal & Prototype Plan
+🎯 Objective
 
-**Use Lovable**
+To design and develop an online two-wheeler marketplace that connects buyers, sellers, and dealerships under a single platform. The platform will help users discover the right vehicle, compare options, calculate affordability, and book rides, while dealerships can manage their inventory and track sales.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9099d3d3-6913-4582-aaa5-cc1994f20c84) and start prompting.
+📐 Prototype Plan
 
-Changes made via Lovable will be committed automatically to this repo.
+Landing Page – Modern UI with search bar, filters, featured bikes, upcoming launches, testimonials.
 
-**Use your preferred IDE**
+Browse & Search – List of bikes with filters for brand, price, fuel type, etc.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Bike Details Page – Specs, images, EMI calculator, fuel cost estimator, comparison option.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Comparison Module – Side-by-side comparison of multiple bikes.
 
-Follow these steps:
+Dealership Page – Showroom locator with Google Maps integration.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Sell Bike Module – Users can upload images and details to sell their used bikes.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Test Ride Booking – Form to book test rides with dealerships.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Admin/Dealer Dashboard – Inventory management, leads tracking, analytics (future scope).
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+🌟 Features to be Implemented
 
-**Edit a file directly in GitHub**
+✅ Browse and filter bikes, scooters, and EVs
+✅ Advanced search by brand, price, fuel type, mileage
+✅ Detailed product pages with images, specifications, and reviews
+✅ Model comparison (multiple bikes side by side)
+✅ EMI & Fuel cost calculators
+✅ Upcoming launches with countdowns and teasers
+✅ Showroom locator with map integration
+✅ Book test rides online
+✅ Sell used bikes (upload bike details + images)
+✅ Responsive, mobile-first design with modern UI
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🛠️ Tech Stack
+Frontend
 
-**Use GitHub Codespaces**
+React + Vite (fast and modular development)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+TailwindCSS (responsive styling)
 
-## What technologies are used for this project?
+React Router (navigation)
 
-This project is built with:
+Backend
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Node.js + Express (REST API)
 
-## How can I deploy this project?
+OR Django/Flask (alternative backends depending on preference)
 
-Simply open [Lovable](https://lovable.dev/projects/9099d3d3-6913-4582-aaa5-cc1994f20c84) and click on Share -> Publish.
+Database
 
-## Can I connect a custom domain to my Lovable project?
+PostgreSQL (structured data: users, bookings, inventory)
 
-Yes, you can!
+MongoDB (bike listings, reviews, images)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Others
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Cloudinary/Firebase (image uploads & hosting)
+
+Google Maps API (showroom locator)
+
+Razorpay/Stripe (future payment gateway integration)
+
+👥 Team Contributions
+Team Member	Contribution
+Nandyal Ram Sai	-Frontend development (React + Tailwind UI, Landing Page, Bike Listing UI)
+Sanniboyina Kavya -	Backend API development (Node.js/Express, authentication, data models)
+Mannam Ganesh Babu -	Database design (PostgreSQL schema, MongoDB integration for reviews/listings)
+Shaik Samreen	-EMI & Fuel cost calculator logic, bike comparison module
+Kamani Sashank -	Test ride booking & Sell used bike module (form handling, uploads)
