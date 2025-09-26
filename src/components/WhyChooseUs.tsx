@@ -1,72 +1,69 @@
-import { Shield, Calculator, Users, Headphones, Award, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Shield, Zap, Award, Heart } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const WhyChooseUs = () => {
+  const { user } = useAuth();
+  
+  // Don't render if user is not logged in
+  if (!user) {
+    return null;
+  }
+
   const features = [
     {
       icon: Shield,
       title: "Trusted Dealers",
-      description: "All our dealer partners are verified and certified for quality assurance"
+      description: "All our dealers are verified and trusted by thousands of customers"
     },
     {
-      icon: Calculator,
-      title: "EMI Calculator",
-      description: "Calculate your monthly payments with our easy-to-use EMI calculator"
-    },
-    {
-      icon: Users,
-      title: "Expert Guidance",
-      description: "Get personalized recommendations from our vehicle experts"
-    },
-    {
-      icon: Headphones,
-      title: "24/7 Support",
-      description: "Round-the-clock customer support for all your queries and concerns"
+      icon: Zap,
+      title: "Fast Delivery",
+      description: "Quick delivery across India with real-time tracking"
     },
     {
       icon: Award,
       title: "Best Prices",
-      description: "Competitive pricing with exclusive deals and offers just for you"
+      description: "Guaranteed best prices with price match promise"
     },
     {
-      icon: MapPin,
-      title: "Doorstep Service",
-      description: "Test rides and documentation assistance at your convenience"
+      icon: Heart,
+      title: "24/7 Support",
+      description: "Round the clock customer support for all your queries"
     }
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Why Choose Vahan Bazar?
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We make buying and selling two-wheelers easier, safer, and more rewarding 
-            than ever before.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            We're committed to providing you with the best vehicle buying experience
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div 
-              key={index}
-              className="text-center p-6 rounded-xl hover:bg-secondary/50 transition-colors duration-300 animate-fade-in group"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <feature.icon className="w-8 h-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <Card key={index} className="border-0 bg-background hover:shadow-lg transition-shadow">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

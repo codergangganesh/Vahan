@@ -129,4 +129,32 @@ All colors MUST be HSL.
   .animate-delay-600 {
     animation-delay: 600ms;
   }
+  
+  /* Feedback animation styles */
+  .animate-flow-left {
+    animation: flow-left 30s linear infinite;
+  }
+  
+  .animate-flow-right {
+    animation: flow-right 30s linear infinite;
+  }
+}
+
+/* Keyframes for feedback animations */
+@keyframes flow-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes flow-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

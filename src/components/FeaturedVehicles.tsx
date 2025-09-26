@@ -2,13 +2,21 @@ import VehicleCard from "./VehicleCard";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useApp } from "@/context/AppContext";
+import { useAuth } from "@/context/AuthContext";
 
 interface FeaturedVehiclesProps {
   onViewDetails?: (vehicleId: string) => void;
+  onViewAll?: () => void;
 }
 
-const FeaturedVehicles = ({ onViewDetails }: FeaturedVehiclesProps) => {
+const FeaturedVehicles = ({ onViewDetails, onViewAll }: FeaturedVehiclesProps) => {
   const { vehicles } = useApp();
+  const { user } = useAuth();
+  
+  // Don't render if user is not logged in
+  if (!user) {
+    return null;
+  }
   
   // Show first 8 vehicles as featured
   const featuredVehicles = vehicles.slice(0, 8);
@@ -48,7 +56,7 @@ const FeaturedVehicles = ({ onViewDetails }: FeaturedVehiclesProps) => {
 
         {/* View All */}
         <div className="text-center">
-          <Button variant="hero" size="lg">
+          <Button variant="hero" size="lg" onClick={onViewAll}>
             View All Vehicles
           </Button>
         </div>

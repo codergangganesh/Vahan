@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Heart, 
   Star, 
@@ -26,7 +25,6 @@ import Vehicle360View from './Vehicle360View';
 const VehicleDetails = ({ vehicleId, onBack }) => {
   const { getVehicleById, wishlist, toggleWishlist } = useApp();
   const [showBookingForm, setShowBookingForm] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
   
   const vehicle = getVehicleById(vehicleId);
   
@@ -48,14 +46,6 @@ const VehicleDetails = ({ vehicleId, onBack }) => {
     return `₹${(price / 1000).toFixed(0)}K`;
   };
 
-  const specifications = [
-    { label: 'Max Power', value: vehicle.specifications.maxPower, icon: Settings },
-    { label: 'Max Torque', value: vehicle.specifications.maxTorque, icon: Settings },
-    { label: 'Transmission', value: vehicle.specifications.transmission, icon: Settings },
-    { label: 'Fuel Capacity', value: vehicle.specifications.fuelCapacity || vehicle.specifications.range, icon: Fuel },
-    { label: 'Weight', value: vehicle.specifications.weight, icon: Settings },
-  ];
-
   if (showBookingForm) {
     return (
       <BookingForm 
@@ -67,9 +57,9 @@ const VehicleDetails = ({ vehicleId, onBack }) => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       {/* Header */}
-      <div className="bg-gradient-hero text-white">
+      <div className="bg-gradient-hero text-white shadow-lg">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Button 
@@ -97,44 +87,85 @@ const VehicleDetails = ({ vehicleId, onBack }) => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            {/* Vehicle Image */}
-            <Card className="p-6 mb-6">
-              <div className="relative">
-                <img 
-                  src={vehicle.image} 
-                  alt={vehicle.name}
-                  className="w-full h-80 object-cover rounded-lg"
-                />
-                
-                {/* Badges */}
-                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                  {vehicle.isNew && <Badge className="bg-accent text-accent-foreground">New Launch</Badge>}
-                  {vehicle.discount && (
-                    <Badge className="bg-destructive text-destructive-foreground">
-                      {vehicle.discount}% Off
-                    </Badge>
-                  )}
-                  {vehicle.fuelType === "Electric" && (
-                    <Badge className="bg-primary text-primary-foreground">
-                      <Zap className="w-3 h-3 mr-1" />
-                      Electric
-                    </Badge>
-                  )}
+        <div className="max-w-7xl mx-auto">
+          {/* Main Vehicle Section - Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {/* Left Column - Vehicle Image and Key Info */}
+            <div className="space-y-6">
+              {/* Vehicle Image */}
+              <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+                <div className="relative">
+                  <img 
+                    src={vehicle.image} 
+                    alt={vehicle.name}
+                    className="w-full h-96 object-cover rounded-xl brightness-100 contrast-100"
+                  />
+                  
+                  {/* Badges */}
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    {vehicle.isNew && <Badge className="bg-accent text-accent-foreground">New Launch</Badge>}
+                    {vehicle.discount && (
+                      <Badge className="bg-destructive text-destructive-foreground">
+                        {vehicle.discount}% Off
+                      </Badge>
+                    )}
+                    {vehicle.fuelType === "Electric" && (
+                      <Badge className="bg-primary text-primary-foreground">
+                        <Zap className="w-3 h-3 mr-1" />
+                        Electric
+                      </Badge>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
 
-            {/* Vehicle Info */}
-            <Card className="p-6 mb-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
+              {/* Quick Specs */}
+              <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+                <h3 className="text-xl font-bold mb-4">Key Specifications</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2 p-3 bg-secondary/10 rounded-lg">
+                    <Fuel className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Mileage</p>
+                      <p className="font-semibold">{vehicle.mileage} {vehicle.fuelType === 'Electric' ? 'km/charge' : 'km/l'}</p>
+                    </div>
+                  </div>
+                  {vehicle.engineCapacity && (
+                    <div className="flex items-center gap-2 p-3 bg-secondary/10 rounded-lg">
+                      <Settings className="w-5 h-5 text-primary" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Engine</p>
+                        <p className="font-semibold">{vehicle.engineCapacity}cc</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2 p-3 bg-secondary/10 rounded-lg">
+                    <Award className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Fuel Type</p>
+                      <p className="font-semibold">{vehicle.fuelType}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-secondary/10 rounded-lg">
+                    <Star className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Rating</p>
+                      <p className="font-semibold">{vehicle.rating}/5</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            {/* Right Column - Vehicle Details and Actions */}
+            <div className="space-y-6">
+              {/* Vehicle Info */}
+              <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+                <div className="mb-4">
                   <div className="text-sm text-muted-foreground mb-1">{vehicle.brand}</div>
                   <h1 className="text-3xl font-bold text-card-foreground mb-2">{vehicle.name}</h1>
                   
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-2 mb-4">
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-accent text-accent" />
                       <span className="font-medium">{vehicle.rating}</span>
@@ -147,7 +178,7 @@ const VehicleDetails = ({ vehicleId, onBack }) => {
                   </div>
                 </div>
 
-                <div className="text-right">
+                <div className="mb-6">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-3xl font-bold text-card-foreground">
                       {formatPrice(vehicle.price)}
@@ -160,150 +191,90 @@ const VehicleDetails = ({ vehicleId, onBack }) => {
                   </div>
                   <div className="text-sm text-muted-foreground">Ex-showroom Delhi</div>
                 </div>
-              </div>
 
-              <p className="text-muted-foreground mb-4">{vehicle.description}</p>
+                <p className="text-muted-foreground mb-6">{vehicle.description}</p>
 
-              {/* Key Specs */}
-              <div className="flex items-center gap-6 text-sm text-muted-foreground border-t pt-4">
-                <div className="flex items-center gap-1">
-                  <Fuel className="w-4 h-4" />
-                  <span>{vehicle.mileage} {vehicle.fuelType === 'Electric' ? 'km/charge' : 'km/l'}</span>
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <Button 
+                    variant="hero"
+                    size="lg" 
+                    className="w-full py-6 text-lg hover:shadow-lg transition-all duration-300"
+                    onClick={() => setShowBookingForm(true)}
+                  >
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Book Test Ride
+                  </Button>
+                  
+                  <Button variant="accent" size="lg" className="w-full py-6 text-lg">
+                    <Phone className="w-5 h-5 mr-2" />
+                    Get Best Price
+                  </Button>
+                  
+                  <Button variant="outline" size="lg" className="w-full py-6 text-lg border-2 hover:shadow-md transition-all">
+                    <MapPin className="w-5 h-5 mr-2" />
+                    Find Dealers
+                  </Button>
                 </div>
-                {vehicle.engineCapacity && (
-                  <div>{vehicle.engineCapacity}cc</div>
-                )}
-                <div className="px-2 py-1 bg-muted rounded-md text-xs">
-                  {vehicle.fuelType}
+              </Card>
+
+              {/* EMI Calculator */}
+              <EMICalculator vehiclePrice={vehicle.price} />
+            </div>
+          </div>
+
+          {/* Additional Sections - Full Width */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Reviews Section */}
+            <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Star className="w-5 h-5 mr-2 text-yellow-500" />
+                Customer Reviews
+              </h3>
+              <div className="space-y-4">
+                <div className="p-5 bg-secondary/10 rounded-xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star key={star} className="w-5 h-5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <span className="font-bold">Excellent Performance</span>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "Great bike with excellent fuel efficiency and smooth riding experience. Highly recommended!"
+                  </p>
+                  <div className="text-sm text-muted-foreground mt-3">- Verified Buyer</div>
                 </div>
               </div>
             </Card>
 
-            {/* Tabs */}
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-5">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="specs">Specifications</TabsTrigger>
-                <TabsTrigger value="360view">
-                  <Eye className="w-4 h-4 mr-1" />
-                  360° View
-                </TabsTrigger>
-                <TabsTrigger value="reviews">Reviews</TabsTrigger>
-                <TabsTrigger value="gallery">Gallery</TabsTrigger>
-              </TabsList>
+            {/* Gallery Section */}
+            <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Settings className="w-5 h-5 mr-2" />
+                Photo Gallery
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-48 object-cover rounded-lg" />
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-48 object-cover rounded-lg" />
+              </div>
+            </Card>
 
-              <TabsContent value="overview" className="mt-6">
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Key Features</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-primary" />
-                      <span>Safety Features</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Settings className="w-4 h-4 text-primary" />
-                      <span>Advanced Technology</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Award className="w-4 h-4 text-primary" />
-                      <span>Award Winning Design</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Fuel className="w-4 h-4 text-primary" />
-                      <span>Fuel Efficient</span>
-                    </div>
-                  </div>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="specs" className="mt-6">
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Technical Specifications</h3>
-                  <div className="space-y-4">
-                    {specifications.map((spec, index) => (
-                      <div key={index} className="flex items-center justify-between py-2 border-b border-border/50">
-                        <div className="flex items-center gap-2">
-                          <spec.icon className="w-4 h-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">{spec.label}</span>
-                        </div>
-                        <span className="font-medium">{spec.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="360view" className="mt-6">
+            {/* 360° View Section */}
+            <Card className="p-6 shadow-xl border-0 bg-gradient-to-br from-white to-secondary/30">
+              <h3 className="text-xl font-bold mb-6 flex items-center">
+                <Eye className="w-5 h-5 mr-2" />
+                360° View
+              </h3>
+              <div className="bg-muted rounded-lg p-4 h-full">
                 <Vehicle360View 
                   vehicleId={vehicle.id}
                   vehicleName={vehicle.name}
                   baseImage={vehicle.image}
                 />
-              </TabsContent>
-
-              <TabsContent value="reviews" className="mt-6">
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Customer Reviews</h3>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-secondary rounded-lg">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="flex">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <Star key={star} className="w-4 h-4 fill-accent text-accent" />
-                          ))}
-                        </div>
-                        <span className="font-medium">Excellent Performance</span>
-                      </div>
-                      <p className="text-muted-foreground text-sm">
-                        "Great bike with excellent fuel efficiency and smooth riding experience. Highly recommended!"
-                      </p>
-                      <div className="text-xs text-muted-foreground mt-2">- Verified Buyer</div>
-                    </div>
-                  </div>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="gallery" className="mt-6">
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Photo Gallery</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <img src={vehicle.image} alt={vehicle.name} className="w-full h-40 object-cover rounded-lg" />
-                    <img src={vehicle.image} alt={vehicle.name} className="w-full h-40 object-cover rounded-lg" />
-                  </div>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Action Buttons */}
-            <Card className="p-6">
-              <div className="space-y-4">
-                <Button 
-                  variant="hero" 
-                  size="lg" 
-                  className="w-full"
-                  onClick={() => setShowBookingForm(true)}
-                >
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Book Test Ride
-                </Button>
-                
-                <Button variant="accent" size="lg" className="w-full">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Get Best Price
-                </Button>
-                
-                <Button variant="outline" size="lg" className="w-full">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  Find Dealers
-                </Button>
               </div>
             </Card>
-
-            {/* EMI Calculator */}
-            <EMICalculator vehiclePrice={vehicle.price} />
           </div>
         </div>
       </div>

@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, Shield, Zap } from "lucide-react";
 import SearchFilters from "./SearchFilters";
 import heroBike from "@/assets/hero-bike.jpg";
+import { useAuth } from "@/context/AuthContext";
 
-const HeroSection = () => {
+const HeroSection = ({ onSearch }) => {
+  const { user } = useAuth();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -30,8 +33,21 @@ const HeroSection = () => {
             From bikes to scooters and EVs - find your ride today!
           </p>
 
-          {/* Search Bar */}
-          <SearchFilters className="max-w-4xl mx-auto mb-8" />
+          {/* Search Bar - Only show when user is logged in */}
+          {user ? (
+            <SearchFilters className="max-w-4xl mx-auto mb-8" onSearch={onSearch} />
+          ) : (
+            <div className="max-w-4xl mx-auto mb-8">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={onSearch}
+              >
+                Login to Search Vehicles
+              </Button>
+            </div>
+          )}
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">

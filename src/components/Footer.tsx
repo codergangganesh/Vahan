@@ -2,7 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Facebook, Twitter, Instagram, Linkedin, Phone, Mail, MapPin } from "lucide-react";
 
-const Footer = () => {
+const Footer = ({ onNavigate }) => {
+  const handleNavigation = (page) => {
+    if (onNavigate) {
+      onNavigate(page);
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
@@ -16,8 +22,8 @@ const Footer = () => {
               <span className="text-xl font-bold">Vahan Bazar</span>
             </div>
             <p className="text-background/80 mb-6 leading-relaxed">
-              India's largest two-wheeler marketplace connecting buyers and sellers 
-              with trusted dealers nationwide.
+              India's premier two-wheeler marketplace connecting buyers and sellers 
+              with trusted dealers nationwide. Find your dream bike today!
             </p>
             <div className="flex space-x-4">
               <Button variant="ghost" size="icon" className="text-background/80 hover:text-background hover:bg-background/10">
@@ -39,12 +45,54 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Browse Bikes</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Scooters</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Electric Vehicles</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Upcoming Launches</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Compare Vehicles</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">EMI Calculator</a></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('category?category=bike')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Browse Bikes
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('category?category=scooter')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Scooters
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('category?category=ev')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Electric Vehicles
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('upcoming')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Upcoming Launches
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('compare')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Compare Vehicles
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('view-all')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  View All Vehicles
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -52,12 +100,54 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Services</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Sell Your Bike</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Book Test Ride</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Vehicle Insurance</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Loan Assistance</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Dealer Registration</a></li>
-              <li><a href="#" className="text-background/80 hover:text-background transition-colors">Support Center</a></li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('sell')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Sell Your Bike
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('book-test-ride')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Book Test Ride
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('emi-calculator')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  EMI Calculator
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('insurance')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Vehicle Insurance
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('loan-assistance')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Loan Assistance
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavigation('support')} 
+                  className="text-background/80 hover:text-background transition-colors text-left"
+                >
+                  Support Center
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -80,7 +170,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-background/80" />
-                <span className="text-background/80 text-sm">+91 1800-XXX-XXXX</span>
+                <span className="text-background/80 text-sm">+91 98765 43210</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-background/80" />
@@ -89,8 +179,8 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 text-background/80 mt-1" />
                 <span className="text-background/80 text-sm">
-                  123 Business Hub, Sector 14,<br />
-                  Gurgaon, Haryana 122001
+                  123 Auto Hub, Sector 15,<br />
+                  Mumbai, Maharashtra 400001
                 </span>
               </div>
             </div>
@@ -104,10 +194,30 @@ const Footer = () => {
               © 2024 Vahan Bazar. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-background/60 hover:text-background transition-colors">Privacy Policy</a>
-              <a href="#" className="text-background/60 hover:text-background transition-colors">Terms of Service</a>
-              <a href="#" className="text-background/60 hover:text-background transition-colors">Cookie Policy</a>
-              <a href="#" className="text-background/60 hover:text-background transition-colors">Help Center</a>
+              <button 
+                onClick={() => handleNavigation('privacy-policy')} 
+                className="text-background/60 hover:text-background transition-colors"
+              >
+                Privacy Policy
+              </button>
+              <button 
+                onClick={() => handleNavigation('terms')} 
+                className="text-background/60 hover:text-background transition-colors"
+              >
+                Terms of Service
+              </button>
+              <button 
+                onClick={() => handleNavigation('cookie-policy')} 
+                className="text-background/60 hover:text-background transition-colors"
+              >
+                Cookie Policy
+              </button>
+              <button 
+                onClick={() => handleNavigation('help')} 
+                className="text-background/60 hover:text-background transition-colors"
+              >
+                Help Center
+              </button>
             </div>
           </div>
         </div>
