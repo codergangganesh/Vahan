@@ -168,13 +168,12 @@ bun install
 ```
 
 3. Set up environment variables:
-Create a `.env` file based on `.env.example`:
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-**Important**: Never commit your actual Supabase credentials to the repository. Always use placeholder values in the `.env` file and keep your real credentials in a local `.env.local` file that is excluded from version control.
+   - Copy `.env.example` to create your own `.env.local` file:
+   ```bash
+   cp .env.example .env.local
+   ```
+   - Update `.env.local` with your actual Supabase credentials
+   - **Important**: Never commit your actual credentials to the repository
 
 4. Run the development server:
 ```bash
@@ -228,6 +227,13 @@ All sensitive configuration is stored in environment variables:
 3. Regularly rotate your API keys and credentials
 4. Use strong, unique passwords for all accounts
 5. Enable two-factor authentication where available
+
+### Environment File Hierarchy
+1. `.env` - Contains placeholder values (committed to repository)
+2. `.env.local` - Contains actual credentials (gitignored)
+3. `.env.example` - Template for creating `.env.local` (committed to repository)
+
+When the application runs, it will load variables in this order, with later files overwriting earlier ones.
 
 ## 🌐 GitHub Workflow
 
