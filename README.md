@@ -1,4 +1,4 @@
-# Vahan Bazar - Two-Wheeler Marketplace Web App
+
 
 ## 🚀 Project Overview
 
@@ -6,6 +6,9 @@
 
 
 Vahan Bazar is a modern two-wheeler marketplace web application that connects buyers, sellers, and dealerships in a single platform. Users can browse bikes, scooters, and electric vehicles (EVs), search and filter by brand, price, or fuel type, view detailed specifications with images, compare models side by side, use EMI and fuel cost calculators, check upcoming launches, explore showrooms, and book test rides or sell used bikes.
+
+
+![WhatsApp Image 2025-09-27 at 14 26 45_35103731](https://github.com/user-attachments/assets/b4ffca7c-3d2f-4ee1-8dbd-73c8f4ebad04)
 
 ## ⚠️ SECURITY NOTICE
 
@@ -159,31 +162,31 @@ To design and develop an online two-wheeler marketplace that connects buyers, se
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd cycle-savvy-search
+git clone <https://github.com/Kavya-Sanniboyina/Wheelux.git>
+cd Wheelixe
 ```
 
 2. Install dependencies:
 ```bash
-bun install
+npm install
 ```
 
 3. Set up environment variables:
-   - Copy `.env.example` to create your own `.env.local` file:
+   - create a .env file in root of the project 
    ```bash
-   cp .env.example .env.local
+   
    ```
    - Update `.env.local` with your actual Supabase credentials
    - **Important**: Never commit your actual credentials to the repository
 
 4. Run the development server:
 ```bash
-bun run dev
+npm run dev
 ```
 
 ### Building for Production
 ```bash
-bun run build
+npm run build
 ```
 
 ### Deployment
@@ -282,3 +285,4 @@ For support, email [team-email] or file an issue in the repository.
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 #
+
