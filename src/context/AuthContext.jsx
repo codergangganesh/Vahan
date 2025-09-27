@@ -2,14 +2,19 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-supabase-url.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key-here';
 
 console.log('Supabase URL:', supabaseUrl);
 console.log('Supabase Anon Key:', supabaseAnonKey);
 
-// Create Supabase client
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create Supabase client only if we have valid credentials
+let supabase = null;
+if (supabaseUrl && supabaseAnonKey && supabaseUrl !== 'https://your-supabase-url.supabase.co' && supabaseAnonKey !== 'your-anon-key-here') {
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
+} else {
+  console.warn('Supabase credentials not configured. Authentication features will be disabled.');
+}
 
 const AuthContext = createContext();
 
@@ -28,6 +33,14 @@ export const AuthProvider = ({ children }) => {
 
   // Check active session on app load
   useEffect(() => {
+    // If Supabase is not configured, simulate logged in state for development
+    if (!supabase) {
+      console.log('Supabase not configured, using mock user for development');
+      setUser({ id: 'mock-user-id', email: 'demo@example.com' });
+      setLoading(false);
+      return;
+    }
+    
     const checkSession = async () => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -63,6 +76,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signIn = async (email, password) => {
+    // If Supabase is not configured, use mock authentication
+    if (!supabase) {
+      console.log('Using mock authentication');
+      const mockUser = { id: 'mock-user-id', email };
+      setUser(mockUser);
+      return { user: mockUser };
+    }
+    
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -84,6 +105,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signUp = async (email, password, name) => {
+    // If Supabase is not configured, use mock authentication
+    if (!supabase) {
+      console.log('Using mock sign up');
+      const mockUser = { id: 'mock-user-id', email };
+      setUser(mockUser);
+      return { user: mockUser };
+    }
+    
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -109,6 +138,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signInWithGoogle = async () => {
+    // If Supabase is not configured, use mock authentication
+    if (!supabase) {
+      console.log('Using mock Google sign in');
+      const mockUser = { id: 'mock-user-id', email: 'google-user@example.com' };
+      setUser(mockUser);
+      return { user: mockUser };
+    }
+    
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -128,6 +165,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signOut = async () => {
+    // If Supabase is not configured, use mock sign out
+    if (!supabase) {
+      console.log('Using mock sign out');
+      setUser(null);
+      setSellBikeAuth(false);
+      return;
+    }
+    
     try {
       const { error } = await supabase.auth.signOut();
       
@@ -147,6 +192,13 @@ export const AuthProvider = ({ children }) => {
 
   // Special authentication for Sell Your Bike page
   const authenticateSellBike = async (email, password) => {
+    // If Supabase is not configured, allow access for development
+    if (!supabase) {
+      console.log('Supabase not configured, allowing Sell Your Bike access for development');
+      setSellBikeAuth(true);
+      return { success: true };
+    }
+    
     // Fixed credentials for Sell Your Bike page
     if (email === 'mannamganeshbabu8@gmail.com' && password === 'Ganeshbabu@123') {
       setSellBikeAuth(true);
@@ -164,7 +216,7 @@ export const AuthProvider = ({ children }) => {
     signOut,
     sellBikeAuth,
     authenticateSellBike,
-    supabase
+    supabase: supabase || null
   };
 
   return (

@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
-import heroBike from "@/assets/hero-bike.jpg";
-import electricScooter from "@/assets/electric-scooter.jpg";
-import classicBike from "@/assets/classic-bike.jpg";
-import sportBike from "@/assets/sport-bike.jpg";
-import electricScooter2 from "@/assets/electric-scooter-2.jpg";
-import cruiserBike from "@/assets/cruiser-bike.jpg";
+import heroBike from '../assets/hero-bike.jpg';
+import electricScooter from '../assets/electric-scooter.jpg';
+import classicBike from '../assets/classic-bike.jpg';
+import sportBike from '../assets/sport-bike.jpg';
+import electricScooter2 from '../assets/electric-scooter-2.jpg';
+import cruiserBike from '../assets/cruiser-bike.jpg';
 
 const AppContext = createContext();
 

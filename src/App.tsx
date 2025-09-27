@@ -3,7 +3,7 @@ import { AppProvider } from './context/AppContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Toaster } from './components/ui/toaster';
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
+import HeroSection from "./components/HeroSection.jsx";
 import FeaturedVehicles from "./components/FeaturedVehicles";
 import Categories from "./components/Categories";
 import WhyChooseUs from "./components/WhyChooseUs";
@@ -23,16 +23,21 @@ import ViewAllVehicles from "./pages/ViewAllVehicles";
 import LoginPage from "./pages/LoginPage";
 import { useApp } from './context/AppContext';
 
+// Type definition for HeroSection props
+interface HeroSectionProps {
+  onSearch?: () => void;
+}
+
 function AppContent() {
   console.log('AppContent rendered');
-  const [currentView, setCurrentView] = useState('home');
-  const [selectedVehicleId, setSelectedVehicleId] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [currentView, setCurrentView] = useState<string>('home');
+  const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { searchVehicles } = useApp();
   const { user, loading } = useAuth();
 
   // Handle navigation
-  const handleViewDetails = (vehicleId) => {
+  const handleViewDetails = (vehicleId: string) => {
     if (!user) {
       setCurrentView('login');
       return;
@@ -41,7 +46,7 @@ function AppContent() {
     setCurrentView('details');
   };
 
-  const handleNavigate = (page) => {
+  const handleNavigate = (page: string) => {
     // Handle special navigation cases
     if (page.startsWith('category?category=')) {
       if (!user) {
@@ -72,7 +77,7 @@ function AppContent() {
     setCurrentView('search');
   };
 
-  const handleCategorySelect = (categoryName) => {
+  const handleCategorySelect = (categoryName: string) => {
     if (!user) {
       setCurrentView('login');
       return;

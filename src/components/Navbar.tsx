@@ -4,6 +4,7 @@ import { useApp } from "@/context/AppContext";
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import ProfileDropdown from "./ProfileDropdown";
+import logoImage from "@/assets/logovahan.jpg"; // Import the logo image
 
 interface NavbarProps {
   onNavigate?: (page: string) => void;
@@ -64,7 +65,7 @@ const Navbar = ({ onNavigate, onSearch }: NavbarProps) => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-              <span ><img src="logovahan.jpg" alt="" /></span>
+              <span><img src="/logovahan.jpg" alt="Vahan Bazar Logo" /></span>
             </div>
             <span className="text-xl font-bold text-foreground">Vahan Bazar</span>
           </div>
