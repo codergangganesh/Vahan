@@ -21,6 +21,8 @@ import SellYourBikePage from "./pages/SellYourBikePage";
 import BookTestRidePage from "./pages/BookTestRidePage";
 import ViewAllVehicles from "./pages/ViewAllVehicles";
 import LoginPage from "./pages/LoginPage";
+import NotFound from "./pages/NotFound";
+
 import { useApp } from './context/AppContext';
 
 // Type definition for HeroSection props
