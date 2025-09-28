@@ -8,7 +8,7 @@
 Vahan Bazar is a modern two-wheeler marketplace web application that connects buyers, sellers, and dealerships in a single platform. Users can browse bikes, scooters, and electric vehicles (EVs), search and filter by brand, price, or fuel type, view detailed specifications with images, compare models side by side, use EMI and fuel cost calculators, check upcoming launches, explore showrooms, and book test rides or sell used bikes.
 
 
-![WhatsApp Image 2025-09-27 at 14 26 45_35103731](https://github.com/user-attachments/assets/b4ffca7c-3d2f-4ee1-8dbd-73c8f4ebad04)
+
 
 ## ⚠️ SECURITY NOTICE
 
